@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Refuge des Innocents — Un lieu pour reconstruire</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #0F2A5C;
+    --navy-mid: #1a3a72;
+    --gold: #C49B1E;
+    --gold-light: #D4AF37;
+    --cream: #FAF7F0;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --text-muted: #5a5a7a;
+    --warm-gray: #f0ede6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(196,155,30,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 70%, rgba(255,255,255,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: rgba(255,255,255,0.72);
+    font-style: italic;
+    margin-bottom: 32px;
+    max-width: 560px;
+  }
+
+  .hero-quote {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: rgba(255,255,255,0.9);
+    border-left: 3px solid var(--gold);
+    padding: 12px 20px;
+    max-width: 600px;
+    text-align: left;
+    margin-bottom: 48px;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.35);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: bounce 2.4s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 80px 24px; }
+
+  .container { max-width: 860px; margin: 0 auto; }
+  .container-wide { max-width: 1060px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  p { color: var(--text-muted); font-size: 1.02rem; margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── HISTOIRE ─── */
+  .histoire { background: var(--white); }
+
+  .histoire-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .histoire-visual {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 40px 32px;
+    text-align: center;
+    color: white;
+  }
+
+  .histoire-visual .year {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .histoire-visual p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .histoire-timeline {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .timeline-item strong {
+    display: block;
+    color: var(--navy);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .timeline-item span {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+
+  /* ─── CONSTAT ─── */
+  .constat { background: var(--navy); }
+
+  .constat h2 { color: var(--white); }
+  .constat .section-label { color: var(--gold); }
+  .constat > .container > p { color: rgba(255,255,255,0.7); }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(196,155,30,0.25);
+    border-radius: 6px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .stat-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── PROJET ─── */
+  .projet { background: var(--cream); }
+
+  .valeurs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .valeur-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--gold);
+  }
+
+  .valeur-icon {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .valeur-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .valeur-card p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  /* ─── LIEU ─── */
+  .lieu { background: var(--white); }
+
+  .lieu-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .lieu-detail {
+    background: var(--warm-gray);
+    border-radius: 6px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .lieu-detail .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--navy);
+    font-weight: 700;
+    display: block;
+  }
+
+  .lieu-detail .label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+
+  /* ─── VISION ─── */
+  .vision { background: var(--navy); }
+  .vision h2 { color: var(--white); }
+  .vision .section-label { color: var(--gold); }
+
+  .vision-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .vision-step {
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 28px 24px;
+    border-left: 3px solid var(--gold);
+  }
+
+  .vision-step .num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .vision-step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .vision-step p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.88rem;
+    margin: 0;
+  }
+
+  /* ─── ACTION ─── */
+  .action { background: var(--cream); }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .action-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 36px 30px;
+    text-align: center;
+  }
+
+  .action-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .action-card p {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  /* ─── QR SECTION ─── */
+  .qr-section {
+    background: var(--navy);
+    padding: 64px 24px;
+    text-align: center;
+  }
+
+  .qr-section h2 {
+    color: var(--white);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    margin-bottom: 12px;
+  }
+
+  .qr-section p {
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+  }
+
+  .qr-box {
+    display: inline-block;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .qr-box img {
+    display: block;
+    width: 160px;
+    height: 160px;
+  }
+
+  .qr-url {
+    color: var(--gold-light);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #071630;
+    padding: 40px 24px;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.85rem;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    .histoire-grid,
+    .valeurs-grid,
+    .vision-steps,
+    .action-grid { grid-template-columns: 1fr; gap: 20px; }
+
+    .stats-row,
+    .lieu-details { grid-template-columns: 1fr; }
+
+    section { padding: 56px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <p class="hero-eyebrow">Senillé-Saint-Sauveur · Vienne (86)</p>
+  <h1>Le Refuge<br><em>des Innocents</em></h1>
+  <p class="hero-subtitle">Un lieu pour reconstruire, apaiser et redonner espoir.</p>
+  <blockquote class="hero-quote">
+    "Quand protéger ne suffit plus, il faut reconstruire."<br>
+    <small style="font-size:0.82rem; color:rgba(255,255,255,0.5); font-style:normal; margin-top:8px; display:block;">— Christophe Aigouy, porteur du projet</small>
+  </blockquote>
+  <div class="hero-cta-group">
+    <a href="https://c.org/d5hTzc5zfs" target="_blank" class="btn-primary">✍ Signer la pétition</a>
+    <a href="#projet" class="btn-outline">Découvrir le projet</a>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; Défiler</div>
+</section>
+
+<!-- ═══ HISTOIRE ═══ -->
+<section class="histoire">
+  <div class="container">
+    <div class="histoire-grid">
+      <div>
+        <p class="section-label">Notre histoire</p>
+        <h2>De l'indicible à l'action</h2>
+        <p>En juin 2025, Christophe Aigouy découvre par la presse les violences subies par son fils Anthony. Comme des centaines de familles, il se retrouve brutalement plongé dans un monde inconnu : procédures, auditions, expertises, attente interminable.</p>
+        <p>Refusant l'inaction, il décide de transformer sa douleur en projet concret : créer le premier lieu pensé pour la reconstruction des enfants victimes et de leurs familles.</p>
+
+        <div class="histoire-timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <strong>Juin 2025 — Le basculement</strong>
+              <span>Découverte des violences subies par Anthony. Immersion brutale dans le monde judiciaire.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <strong>Juillet 2025 — L'association</strong>
+              <span>Création de <em>Les Voix de l'Innocence</em> pour briser le silence et porter la parole des victimes.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <strong>2025–2026 — Le projet</strong>
+              <span>Naissance du Refuge des Innocents : un domaine du XIVe siècle transformé en lieu de reconstruction.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="histoire-visual">
+        <span class="year">2025</span>
+        <p style="font-size:1.1rem; color:var(--gold-light); font-style:italic; margin-bottom:16px;">"Je suis père."</p>
+        <p>Une épreuve qui touche toute la famille. Le début d'un combat. La naissance d'une mission.</p>
+        <hr style="border:none; border-top:1px solid rgba(196,155,30,0.3); margin:24px 0;">
+        <p style="font-size:0.82rem; color:rgba(255,255,255,0.5);">Christophe Aigouy<br>Porteur du projet</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONSTAT ═══ -->
+<section class="constat">
+  <div class="container">
+    <p class="section-label">Pourquoi ce projet ?</p>
+    <h2>Quand les institutions s'arrêtent,<br>la souffrance, elle, continue.</h2>
+    <p>Les auditions se terminent. Les médias repartent. Les procédures suivent leur cours. Les familles restent seules. Qui accompagne la reconstruction ?</p>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-number">160 000</span>
+        <span class="stat-label">enfants victimes par an en France</span>
+        <span class="stat-tag">Un vide réel</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">1,8 M</span>
+        <span class="stat-label">personnes touchées derrière chaque victime, une famille entière brisée</span>
+        <span class="stat-tag">Un enjeu national</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">&lt; 50</span>
+        <span class="stat-label">lieux de reconstruction adaptés en France</span>
+        <span class="stat-tag">Une unicité</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJET ═══ -->
+<section class="projet" id="projet">
+  <div class="container">
+    <p class="section-label">La réponse</p>
+    <h2>Le Refuge des Innocents</h2>
+    <p>Un lieu sécurisé, naturel et humain où les victimes, leurs familles et les personnes traumatisées peuvent se reconstruire à leur rythme, entourées de professionnels bienveillants.</p>
+
+    <div class="valeurs-grid">
+      <div class="valeur-card">
+        <span class="valeur-icon">🤝</span>
+        <h3>Écouter sans juger</h3>
+        <p>Un espace de parole libre, confidentiel et bienveillant pour toute la famille.</p>
+      </div>
+      <div class="valeur-card">
+        <span class="valeur-icon">🏡</span>
+        <h3>Héberger avec bienveillance</h3>
+        <p>Un domaine du XIVe siècle, 8 rue Côte du Pin, au cœur de la Vienne, pour souffler.</p>
+      </div>
+      <div class="valeur-card">
+        <span class="valeur-icon">🌱</span>
+        <h3>Accompagner vers un avenir</h3>
+        <p>Ateliers parentalité, soins bien-être, groupes de parole et suivi professionnel.</p>
+      </div>
+      <div class="valeur-card">
+        <span class="valeur-icon">✨</span>
+        <h3>Redonner confiance et espoir</h3>
+        <p>Bienveillance · Inclusion · Accessibilité · Nature · Résilience · Dignité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LIEU ═══ -->
+<section class="lieu">
+  <div class="container">
+    <p class="section-label">Le domaine</p>
+    <h2>Un patrimoine au service de la reconstruction</h2>
+    <p>Le Refuge des Innocents prendra vie dans un domaine historique du XIVe siècle à Senillé-Saint-Sauveur, dans la Vienne. Un cadre naturel et apaisant, pensé pour la reconstruction humaine.</p>
+
+    <div class="lieu-details">
+      <div class="lieu-detail">
+        <span class="value">XIVe</span>
+        <span class="label">Patrimoine historique</span>
+      </div>
+      <div class="lieu-detail">
+        <span class="value">136 000 €</span>
+        <span class="label">Prix d'acquisition du domaine</span>
+      </div>
+      <div class="lieu-detail">
+        <span class="value">Déc. 2027</span>
+        <span class="label">Ouverture prévue</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VISION ═══ -->
+<section class="vision">
+  <div class="container">
+    <p class="section-label">Vision nationale</p>
+    <h2>Un modèle pour la France entière</h2>
+
+    <div class="vision-steps">
+      <div class="vision-step">
+        <div class="num">01 — Le prototype</div>
+        <h3>Senillé-Saint-Sauveur · Vienne</h3>
+        <p>Ouverture prévue en décembre 2027. Le premier maillon d'un réseau national.</p>
+      </div>
+      <div class="vision-step">
+        <div class="num">02 — La documentation</div>
+        <h3>Modèle transférable</h3>
+        <p>Structure juridique et économique reproductible, documentée et partageable.</p>
+      </div>
+      <div class="vision-step">
+        <div class="num">03 — La labellisation</div>
+        <h3>Standard national</h3>
+        <p>Label "Refuge des Innocents" de reconstruction humaine, reconnu nationalement.</p>
+      </div>
+      <div class="vision-step">
+        <div class="num">04 — L'essaimage</div>
+        <h3>Un Refuge par département</h3>
+        <p>Notre ambition : un réseau national de lieux de reconstruction à terme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACTION ═══ -->
+<section class="action">
+  <div class="container">
+    <p class="section-label">Agir maintenant</p>
+    <h2>Ensemble, construisons ce refuge</h2>
+
+    <div class="action-grid">
+      <div class="action-card">
+        <div style="font-size:2rem; margin-bottom:12px;">✍</div>
+        <h3>Signez la pétition</h3>
+        <p>Chaque signature compte et renforce notre capacité à convaincre les institutions. Faites entendre la voix des innocents.</p>
+        <a href="https://c.org/d5hTzc5zfs" target="_blank" class="btn-primary" style="display:inline-block;">Signer maintenant</a>
+      </div>
+      <div class="action-card">
+        <div style="font-size:2rem; margin-bottom:12px;">🤝</div>
+        <h3>Devenir partenaire</h3>
+        <p>Mécènes, fondations, entreprises, collectivités : rejoignez le projet et bénéficiez de déductions fiscales jusqu'à 66 %.</p>
+        <a href="mailto:Christophe.aigouy@gmail.com" class="btn-primary" style="display:inline-block; background:var(--navy); color:white;">Nous contacter</a>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; text-align:center;">
+      <p style="font-style:italic; color:var(--text-muted); font-size:0.9rem;">Partagez autour de vous — faisons entendre leur voix.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QR ═══ -->
+<section class="qr-section">
+  <h2>Retrouvez tout le projet en ligne</h2>
+  <p>Scannez ce QR code ou rendez-vous directement sur notre site</p>
+  <div class="qr-box">
+    <img src="data:image/png;base64,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" alt="QR Code - www.refuge-innocence.fr">
+  </div>
+  <p class="qr-url">www.refuge-innocence.fr</p>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p style="margin-bottom:8px;">
+    <a href="https://www.refuge-innocence.fr">www.refuge-innocence.fr</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:Christophe.aigouy@gmail.com">Christophe.aigouy@gmail.com</a>
+    &nbsp;·&nbsp;
+    06 50 73 31 91
+  </p>
+  <p>Le Refuge des Innocents · SASU + Association Les Voix de l'Innocence · Senillé-Saint-Sauveur, Vienne (86)</p>
+</footer>
+
+</body>
+</html>
